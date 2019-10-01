@@ -31,6 +31,15 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
+	def feed
+		results = microposts
+		following.each do |f|
+			results.merge(f.microposts)
+		end
+
+		results
+	end
+
   # Remembers a user in the database for use in persistent sessions.
   def remember
     self.remember_token = User.new_token
