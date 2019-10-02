@@ -1,4 +1,6 @@
-<li id="micropost-<%= micropost.id %>">
+<% micropost = bookmark.micropost %>
+<% if micropost.present? %>
+<li id="bookmark-<%= bookmark.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
@@ -10,7 +12,7 @@
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, method: :delete,
                                        data: { confirm: "You sure?" } %>
-			<%= link_to "bookmark", bookmarks_path(micropost_id: micropost.id), method: :post %>
     <% end %>
   </span>
 </li>
+<% end %>
